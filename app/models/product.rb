@@ -4,11 +4,20 @@ class Product < ApplicationRecord
 	validates :price, numericality: { greater_than: 0}
 	validates :description, length: { in: 5..1000 }
 
+#associations--------------------------------------
 
+#join table
 	has_many :product_categories
+	has_many :categories, through: :product_categories
+
+
+#product attributes
 	has_many :orders
 	belongs_to :supplier
 	has_many :images
+
+	has_many :carted_products
+
 	
 	def is_discounted?
 		price <= 2 
@@ -25,6 +34,10 @@ class Product < ApplicationRecord
 
 	def supplier
 		Supplier.find_by(id: supplier_id)
+	end
+
+	def category_names
+		categories.map {  |category|  category.name}
 	end
 		
 end

@@ -1,8 +1,8 @@
 json.id product.id
 json.name product.name
 json.price product.price
-# json.image_url product.image.image_url
 json.description product.description
+json.categories	product.category_names
 
 json.formatted do
 	json.tax product.tax

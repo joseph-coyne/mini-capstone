@@ -1,11 +1,24 @@
 class Api::ProductsController < ApplicationController
 
+before_action :authenticate_admin, except: [:index, :show]
+
 def index
-	@products = Product.all.order(:id)
+
+	@products = Product.all
+	
+
 	if params[:name]
 		@products = Product.where("name LIKE ?", "%#{params[:name]}%")
 	end
+
+
+	if params[:category]
+		category = Category.find_by(name: params[:category])
+		@products = category.products
+	end
+
 	render 'index.json.jbuilder'
+
 end
 
 def show
@@ -14,7 +27,7 @@ def show
 	
 end
 
-before_action :authenticate_admin
+
 
 def create
 
