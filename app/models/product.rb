@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
 	validates :name, presence: true
-	validates :name, length: { in: 5..50 }
+	validates :name, length: { in: 1..50 }
 	validates :price, numericality: { greater_than: 0}
-	validates :description, length: { in: 5..1000 }
+	validates :description, length: { in: 1..1000 }
 
 #associations--------------------------------------
 
